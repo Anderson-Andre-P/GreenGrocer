@@ -1,24 +1,18 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:green_grocer/src/config/custom_colors.dart';
-import 'package:green_grocer/src/home/components/category_tile.dart';
+import 'package:green_grocer/src/pages/home/components/category_tile.dart';
+import 'package:green_grocer/src/config/app_data.dart' as appData;
+import 'package:green_grocer/src/pages/home/components/item_tile.dart';
 
 class HomeTab extends StatefulWidget {
-  const HomeTab({super.key});
+  const HomeTab({Key? key}) : super(key: key);
 
   @override
   State<HomeTab> createState() => _HomeTabState();
 }
 
 class _HomeTabState extends State<HomeTab> {
-  List<String> categories = [
-    'Frutas',
-    'Grãos',
-    'Verduras',
-    'Temperos',
-    'Cereais',
-  ];
-
   String selectedCategory = 'Frutas';
 
   @override
@@ -119,11 +113,11 @@ class _HomeTabState extends State<HomeTab> {
               scrollDirection: Axis.horizontal,
               itemBuilder: (_, index) {
                 return CategoryTile(
-                  category: categories[index],
-                  isSelected: categories[index] == selectedCategory,
+                  category: appData.categories[index],
+                  isSelected: appData.categories[index] == selectedCategory,
                   onPressed: () {
                     setState(() {
-                      selectedCategory = categories[index];
+                      selectedCategory = appData.categories[index];
                     });
                   },
                 );
@@ -131,11 +125,29 @@ class _HomeTabState extends State<HomeTab> {
               separatorBuilder: (_, index) => const SizedBox(
                 width: 10.0,
               ),
-              itemCount: categories.length,
+              itemCount: appData.categories.length,
             ),
           ),
 
           // Grid
+          Expanded(
+            child: GridView.builder(
+              padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+              physics: const BouncingScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10.0,
+                crossAxisSpacing: 10.0,
+                childAspectRatio: 9 / 11.5,
+              ),
+              itemCount: appData.items.length,
+              itemBuilder: (_, index) {
+                return ItemTile(
+                  item: appData.items[index],
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
