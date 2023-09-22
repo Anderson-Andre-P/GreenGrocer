@@ -1,9 +1,9 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:green_grocer/src/config/custom_colors.dart';
 import 'package:green_grocer/src/pages/home/components/category_tile.dart';
 import 'package:green_grocer/src/config/app_data.dart' as appData;
 import 'package:green_grocer/src/pages/home/components/item_tile.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomeTab extends StatefulWidget {
   const HomeTab({Key? key}) : super(key: key);
@@ -52,13 +52,13 @@ class _HomeTabState extends State<HomeTab> {
             ),
             child: GestureDetector(
               onTap: () {},
-              child: Badge(
+              child: badges.Badge(
                 badgeColor: CustomColors.customContrastColor,
                 badgeContent: const Text(
                   '2',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 12.0,
+                    fontSize: 12,
                   ),
                 ),
                 child: Icon(
